@@ -250,11 +250,23 @@ document.getElementById('quickOrderForm')?.addEventListener('submit', async (e) 
 });
 
 /* ══════════════════════════════════════════════════════
-   NAVBAR SCROLL EFFECT
+   NAVBAR SCROLL EFFECT + ACTIVE LINKS
 ══════════════════════════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+
 window.addEventListener('scroll', () => {
-  document.getElementById('navbar')
-    .classList.toggle('scrolled', window.scrollY > 60);
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+
+  // Active nav link highlight
+  const sections = ['hero','products','why-us','contact'];
+  let current = 'hero';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  document.querySelectorAll('.nav-link').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+  });
 });
 
 /* ── Mobile menu ─────────────────────────────────────── */

@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="logo.jpeg" type="image/x-icon">
 </head>
 <body>
 
@@ -85,87 +84,191 @@
   </symbol>
 </svg>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  <div class="announce-inner">
+    <span class="announce-dot"></span>
+    <span>Free delivery on orders above PKR 3,000 in Karachi</span>
+    <span class="announce-sep">•</span>
+    <span>100% Quality Checked Items</span>
+    <span class="announce-sep">•</span>
+    <a href="https://wa.me/923408440671" target="_blank">
+      <svg width="12" height="12"><use href="#ic-whatsapp"/></svg>
+      Order on WhatsApp
+    </a>
+  </div>
+</div>
+
 <!-- NAVBAR -->
 <header class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <img src="logo.jpeg" alt="Thrift Bazar" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="logo-fallback" style="display:none">
-        <span class="logo-text">Thrift<span>Bazar</span></span>
+
+    <!-- Logo -->
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-ring">
+        <img src="logo.jpeg" alt="Thrift Bazar Logo" class="nav-logo-img">
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-brand-main">Thrift</span><span class="nav-brand-accent">Bazar</span>
+        <span class="nav-brand-sub">Karachi</span>
       </div>
     </a>
+
+    <!-- Center nav links -->
     <nav class="nav-links">
-      <a href="#hero">Home</a>
-      <a href="#products">Shop</a>
-      <a href="#why-us">Why Us</a>
-      <a href="#contact">Contact</a>
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#products" class="nav-link">Shop</a>
+      <a href="#why-us" class="nav-link">Why Us</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <a href="#products" class="nav-cta">
-      <svg width="16" height="16"><use href="#ic-shopping-bag"/></svg>
-      Shop Now
-    </a>
-    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+
+    <!-- Right actions -->
+    <div class="nav-actions">
+      <a href="https://wa.me/923408440671" target="_blank" class="nav-wa-btn">
+        <svg width="15" height="15"><use href="#ic-whatsapp"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a href="#products" class="nav-shop-btn">
+        <svg width="15" height="15"><use href="#ic-shopping-bag"/></svg>
+        <span>Shop Now</span>
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
+
+  <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#products" onclick="closeMenu()">Shop</a>
-    <a href="#why-us" onclick="closeMenu()">Why Us</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="#hero"     onclick="closeMenu()"><svg width="14" height="14"><use href="#ic-arrow-right"/></svg> Home</a>
+    <a href="#products" onclick="closeMenu()"><svg width="14" height="14"><use href="#ic-shopping-bag"/></svg> Shop</a>
+    <a href="#why-us"   onclick="closeMenu()"><svg width="14" height="14"><use href="#ic-shield"/></svg> Why Us</a>
+    <a href="#contact"  onclick="closeMenu()"><svg width="14" height="14"><use href="#ic-mail"/></svg> Contact</a>
+    <a href="https://wa.me/923408440671" target="_blank" class="mob-wa">
+      <svg width="14" height="14"><use href="#ic-whatsapp"/></svg> Order on WhatsApp
+    </a>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
+
+  <!-- Animated background canvas -->
+  <div class="hero-bg">
+    <div class="hbg-grain"></div>
+    <div class="hbg-glow g1"></div>
+    <div class="hbg-glow g2"></div>
+    <div class="hbg-glow g3"></div>
+    <!-- Floating tag decorations -->
+    <div class="htag ht1"><svg width="16" height="16"><use href="#ic-tag"/></svg></div>
+    <div class="htag ht2"><svg width="12" height="12"><use href="#ic-shirt"/></svg></div>
+    <div class="htag ht3"><svg width="14" height="14"><use href="#ic-recycle"/></svg></div>
+    <div class="htag ht4"><svg width="10" height="10"><use href="#ic-star"/></svg></div>
+    <div class="htag ht5"><svg width="16" height="16"><use href="#ic-pants"/></svg></div>
   </div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <svg width="14" height="14"><use href="#ic-recycle"/></svg>
-      Pre-loved Fashion in Karachi
+
+  <div class="hero-inner">
+    <!-- LEFT: content -->
+    <div class="hero-left">
+
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        Pre-loved Fashion · Karachi
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="hh-line hh-l1">Dress Bold.</span>
+        <span class="hh-line hh-l2"><em>Spend</em> Less.</span>
+        <span class="hh-line hh-l3">Thrift More.</span>
+      </h1>
+
+      <p class="hero-body">
+        Curated thrift pieces — shirts, jackets, jeans &amp; more.<br>
+        Real style at prices that make sense.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="#products" class="hcta-main">
+          Browse Collection
+          <svg width="17" height="17"><use href="#ic-arrow-right"/></svg>
+        </a>
+        <a href="https://wa.me/923408440671" target="_blank" class="hcta-wa">
+          <svg width="18" height="18"><use href="#ic-whatsapp"/></svg>
+          Chat Us
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="hero-trust">
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="16" height="16"><use href="#ic-shield"/></svg></div>
+          <span>Quality Checked</span>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="16" height="16"><use href="#ic-recycle"/></svg></div>
+          <span>Eco Friendly</span>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg width="16" height="16"><use href="#ic-tag"/></svg></div>
+          <span>Best Prices</span>
+        </div>
+      </div>
     </div>
-    <h1 class="hero-title">
-      Style That<br><em>Doesn't Cost</em><br>the Earth
-    </h1>
-    <p class="hero-subtitle">
-      Curated thrift fashion — shirts, jackets, jeans & more.<br>
-      Quality pieces at prices that make sense.
-    </p>
-    <div class="hero-actions">
-      <a href="#products" class="btn-primary">
-        Browse Collection
-        <svg width="16" height="16"><use href="#ic-arrow-right"/></svg>
-      </a>
-      <a href="https://wa.me/923408440671" target="_blank" class="btn-ghost">
-        <svg width="16" height="16"><use href="#ic-whatsapp"/></svg>
-        Chat on WhatsApp
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><strong id="hero-count">0</strong><span>Items Listed</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>100%</strong><span>Quality Checked</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><strong>PKR 200+</strong><span>Starting Price</span></div>
+
+    <!-- RIGHT: logo showcase + stats -->
+    <div class="hero-right">
+
+      <!-- Big logo orb -->
+      <div class="hero-logo-orb">
+        <div class="orb-ring orb-r1"></div>
+        <div class="orb-ring orb-r2"></div>
+        <div class="orb-ring orb-r3"></div>
+        <div class="orb-core">
+          <img src="logo.jpeg" alt="Thrift Bazar" class="orb-logo">
+        </div>
+        <!-- Floating badges around orb -->
+        <div class="orb-badge ob1">
+          <svg width="14" height="14"><use href="#ic-check"/></svg>
+          Like New
+        </div>
+        <div class="orb-badge ob2">
+          <svg width="14" height="14"><use href="#ic-tag"/></svg>
+          PKR 200+
+        </div>
+        <div class="orb-badge ob3">
+          <svg width="14" height="14"><use href="#ic-star"/></svg>
+          Top Quality
+        </div>
+      </div>
+
+      <!-- Stats row below orb -->
+      <div class="hero-stats-grid">
+        <div class="hstat">
+          <div class="hstat-num" id="hero-count">0</div>
+          <div class="hstat-lbl">Items Live</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-num">100%</div>
+          <div class="hstat-lbl">Checked</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-num">5★</div>
+          <div class="hstat-lbl">Service</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-image-wrap">
-    <div class="hero-float-card fc-1">
-      <svg width="18" height="18"><use href="#ic-check"/></svg>
-      Like New Quality
-    </div>
-    <div class="hero-float-card fc-2">
-      <svg width="18" height="18"><use href="#ic-tag"/></svg>
-      Best Prices
-    </div>
-    <div class="hero-img-placeholder">
-      <svg width="64" height="64"><use href="#ic-shopping-bag"/></svg>
-      <p>Thrift Bazar</p>
-    </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
   </div>
 </section>
 
@@ -349,7 +452,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="logo.jpeg" alt="Thrift Bazar" class="footer-logo" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Thrift Bazar" class="footer-logo" onerror="this.style.display='none'">
         <div class="footer-brand-text">
           <div class="footer-name">Thrift Bazar</div>
           <div class="footer-tagline">Pre-loved Fashion, Fresh Prices</div>
