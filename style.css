@@ -874,7 +874,7 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; }
   color: var(--mid);
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 14px;
