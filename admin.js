@@ -166,7 +166,7 @@ window.doSignUp = async () => {
   }
 };
 
-/* ── GOOGLE SIGN IN ────────────────────────────────────── */
+
 window.doGoogleSignIn = async () => {
   clearAuthErr();
   try {
@@ -179,13 +179,13 @@ window.doGoogleSignIn = async () => {
   }
 };
 
-/* ── LOGOUT ────────────────────────────────────────────── */
+
 window.doLogout = async () => {
   await signOut(auth);
   toast('Logged out. See you soon!');
 };
 
-/* ── ADD PRODUCT ───────────────────────────────────────── */
+
 window.addProduct = async () => {
   const name  = v('p-name'),
         price = v('p-price'),
@@ -257,7 +257,7 @@ window.removeImg = () => {
   document.getElementById('img-remove-btn').classList.remove('show');
 };
 
-/* ── LOAD & RENDER PRODUCTS ────────────────────────────── */
+
 function loadProducts() {
   onValue(ref(db, 'products'), snapshot => {
     const grid = document.getElementById('products-grid');
@@ -309,7 +309,7 @@ function loadProducts() {
   });
 }
 
-/* ── DELETE PRODUCT ────────────────────────────────────── */
+
 window.delProduct = async id => {
   if (!confirm('Remove this item from the bazar?')) return;
   try {
@@ -318,7 +318,7 @@ window.delProduct = async id => {
   } catch (e) { toast('Could not delete. Try again.', 'error'); }
 };
 
-/* ── STATS ─────────────────────────────────────────────── */
+
 function updateStats(products) {
   const total    = products.length;
   const shirts   = products.filter(p =>
@@ -333,7 +333,7 @@ function updateStats(products) {
   document.getElementById('stat-avg').textContent    = avg;
 }
 
-/* ── CATEGORY ICON MAP ─────────────────────────────────── */
+
 function catIcon(cat) {
   const map = {
     'Shirts':'#ic-shirt','T-Shirts':'#ic-shirt',
@@ -345,13 +345,13 @@ function catIcon(cat) {
   return map[cat] || '#ic-tag';
 }
 
-/* ── PAGE SWITCHER ─────────────────────────────────────── */
+
 window.showPage = id => {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 };
 
-/* ── HELPERS ───────────────────────────────────────────── */
+
 const v       = id => document.getElementById(id)?.value.trim() ?? '';
 const esc     = s  => s.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const isEmail = s  => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
