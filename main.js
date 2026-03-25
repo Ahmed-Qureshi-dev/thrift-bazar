@@ -25,7 +25,7 @@ let allProducts = [];
 let activeCat   = 'all';
 let searchQuery = '';
 
-/
+
 onValue(ref(db, 'products'), snapshot => {
   const data = snapshot.val();
   document.getElementById('loadingState').style.display = 'none';
