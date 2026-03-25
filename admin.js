@@ -1,9 +1,4 @@
-/**
- * THRIFT BAZAR — Admin Panel Logic
- * © Ahmed Qureshi Dev. All rights reserved.
- *
- * Firebase Modular SDK (v10) — Email/Password + Google Auth + Realtime DB
- */
+
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -20,7 +15,7 @@ import {
   getDatabase, ref, push, onValue, remove
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-/* ── Firebase config ───────────────────────────────────── */
+
 const firebaseConfig = {
   apiKey:            "AIzaSyARYoO9GHRvL7n9Au3RuE3TyRSFwwrJSzc",
   authDomain:        "hxvjg-5f74a.firebaseapp.com",
@@ -31,7 +26,7 @@ const firebaseConfig = {
   databaseURL:       "https://hxvjg-5f74a-default-rtdb.firebaseio.com"
 };
 
-/* ── Secret key — purely client-side gate ──────────────── */
+
 const ADMIN_SECRET_KEY = "mirumer00";
 
 const app       = initializeApp(firebaseConfig);
@@ -39,14 +34,12 @@ const auth      = getAuth(app);
 const db        = getDatabase(app);
 const gProvider = new GoogleAuthProvider();
 
-/* ══════════════════════════════════════════════════════════
-   BUILD AUTH UI ON PAGE LOAD
-══════════════════════════════════════════════════════════ */
+
 document.addEventListener('DOMContentLoaded', () => {
   const authCard = document.querySelector('.auth-card');
   if (!authCard) return;
 
-  /* ---- Tab bar ---- */
+
   const tabBar = document.createElement('div');
   tabBar.className = 'auth-tabs';
   tabBar.innerHTML = `
@@ -55,13 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   authCard.insertBefore(tabBar, document.getElementById('auth-error'));
 
-  /* ---- Google button on login form ---- */
   document.getElementById('login-form').insertAdjacentHTML('beforeend', `
     <div class="auth-divider"><span>or</span></div>
     <button class="btn-google" onclick="doGoogleSignIn()">${googleSVG()} Continue with Google</button>
   `);
 
-  /* ---- Sign-up panel: email + password + secret key ONLY ---- */
   const signupPanel = document.createElement('div');
   signupPanel.id = 'signup-form';
   signupPanel.style.display = 'none';
@@ -84,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   authCard.appendChild(signupPanel);
 
-  /* ---- Styles ---- */
+
   document.head.insertAdjacentHTML('beforeend', `<style>
     .auth-tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(0,0,0,.06);border-radius:10px;padding:4px}
     .auth-tab-btn{flex:1;padding:8px 0;border:none;border-radius:7px;background:transparent;font-family:inherit;font-size:14px;font-weight:500;color:#888;cursor:pointer;transition:all .2s}
@@ -106,7 +97,7 @@ function googleSVG() {
   </svg>`;
 }
 
-/* ── Tab switcher ──────────────────────────────────────── */
+
 window.switchAuthTab = (tab) => {
   clearAuthErr();
   document.querySelectorAll('.auth-tab-btn').forEach(b =>
@@ -116,7 +107,7 @@ window.switchAuthTab = (tab) => {
   document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
 };
 
-/* ── Auth state observer ───────────────────────────────── */
+
 onAuthStateChanged(auth, user => {
   if (user) {
     document.getElementById('user-email').textContent = user.displayName || user.email;
@@ -127,7 +118,6 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-/* ── LOGIN ─────────────────────────────────────────────── */
 window.doLogin = async () => {
   const email = v('li-email');
   const pass  = v('li-pass');
@@ -139,22 +129,14 @@ window.doLogin = async () => {
   setBtnLoading('li-btn', true, 'Signing in…');
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    /* onAuthStateChanged handles the redirect */
+
   } catch (e) {
     authErr(friendlyError(e.code));
     setBtnLoading('li-btn', false, 'Login to Dashboard');
   }
 };
 
-/* ── SIGN UP ───────────────────────────────────────────── */
-/*
- * WHAT CHANGED (and why it broke before):
- *  ✗ Old: read secret from Firebase DB  → permission-denied error
- *  ✗ Old: write admins/{uid} to DB      → permission-denied error
- *  ✓ New: check secret locally vs ADMIN_SECRET_KEY constant
- *  ✓ New: only call createUserWithEmailAndPassword — no DB writes at all
- *  ✓ New: onAuthStateChanged auto-redirects to dashboard on success
- */
+
 window.doSignUp = async () => {
   const email     = v('su-email');
   const pass      = v('su-pass');
@@ -174,33 +156,32 @@ window.doSignUp = async () => {
   try {
     await createUserWithEmailAndPassword(auth, email, pass);
     toast('Account created! Welcome.', 'success');
-    /* onAuthStateChanged fires → dashboard loads automatically */
+
   } catch (e) {
     authErr(friendlyError(e.code));
     setBtnLoading('su-btn', false, 'Create Account');
   }
 };
 
-/* ── GOOGLE SIGN IN ────────────────────────────────────── */
 window.doGoogleSignIn = async () => {
   clearAuthErr();
   try {
     await signInWithPopup(auth, gProvider);
     toast('Signed in with Google!', 'success');
-    /* onAuthStateChanged handles the redirect */
+  
   } catch (e) {
     if (e.code !== 'auth/popup-closed-by-user')
       authErr(friendlyError(e.code));
   }
 };
 
-/* ── LOGOUT ────────────────────────────────────────────── */
+
 window.doLogout = async () => {
   await signOut(auth);
   toast('Logged out. See you soon!');
 };
 
-/* ── ADD PRODUCT ───────────────────────────────────────── */
+
 window.addProduct = async () => {
   const name  = v('p-name'),
         price = v('p-price'),
@@ -251,7 +232,7 @@ window.addProduct = async () => {
   }
 };
 
-/* ── IMAGE PREVIEW / REMOVE ────────────────────────────── */
+
 window.previewImg = (input) => {
   const file = input.files[0];
   if (!file) return;
@@ -273,7 +254,7 @@ window.removeImg = () => {
   document.getElementById('img-remove-btn').classList.remove('show');
 };
 
-/* ── LOAD & RENDER PRODUCTS ────────────────────────────── */
+
 function loadProducts() {
   onValue(ref(db, 'products'), snapshot => {
     const grid = document.getElementById('products-grid');
@@ -325,7 +306,7 @@ function loadProducts() {
   });
 }
 
-/* ── DELETE PRODUCT ────────────────────────────────────── */
+
 window.delProduct = async id => {
   if (!confirm('Remove this item from the bazar?')) return;
   try {
@@ -334,7 +315,6 @@ window.delProduct = async id => {
   } catch (e) { toast('Could not delete. Try again.', 'error'); }
 };
 
-/* ── STATS ─────────────────────────────────────────────── */
 function updateStats(products) {
   const total    = products.length;
   const shirts   = products.filter(p =>
@@ -349,7 +329,7 @@ function updateStats(products) {
   document.getElementById('stat-avg').textContent    = avg;
 }
 
-/* ── CATEGORY ICON MAP ─────────────────────────────────── */
+
 function catIcon(cat) {
   const map = {
     'Shirts':'#ic-shirt','T-Shirts':'#ic-shirt',
@@ -361,13 +341,13 @@ function catIcon(cat) {
   return map[cat] || '#ic-tag';
 }
 
-/* ── PAGE SWITCHER ─────────────────────────────────────── */
+
 window.showPage = id => {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 };
 
-/* ── HELPERS ───────────────────────────────────────────── */
+
 const v       = id => document.getElementById(id)?.value.trim() ?? '';
 const esc     = s  => s.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const isEmail = s  => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
