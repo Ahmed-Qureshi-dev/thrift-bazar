@@ -1,8 +1,4 @@
-/**
- * THRIFT BAZAR — User Website JS
- * Firebase Modular SDK v10
- * Reads products from DB + handles orders
- */
+
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -10,7 +6,7 @@ import {
   getDatabase, ref, onValue, push
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-/* ── Firebase config ─────────────────────────────────── */
+
 const firebaseConfig = {
   apiKey:            "AIzaSyARYoO9GHRvL7n9Au3RuE3TyRSFwwrJSzc",
   authDomain:        "hxvjg-5f74a.firebaseapp.com",
@@ -24,14 +20,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 
-/* ── State ───────────────────────────────────────────── */
+
 let allProducts = [];
 let activeCat   = 'all';
 let searchQuery = '';
 
-/* ══════════════════════════════════════════════════════
-   LOAD PRODUCTS FROM FIREBASE
-══════════════════════════════════════════════════════ */
+/
 onValue(ref(db, 'products'), snapshot => {
   const data = snapshot.val();
   document.getElementById('loadingState').style.display = 'none';
