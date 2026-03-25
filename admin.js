@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const authCard = document.querySelector('.auth-card');
   if (!authCard) return;
 
-
   const tabBar = document.createElement('div');
   tabBar.className = 'auth-tabs';
   tabBar.innerHTML = `
@@ -75,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   authCard.appendChild(signupPanel);
 
-
   document.head.insertAdjacentHTML('beforeend', `<style>
     .auth-tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(0,0,0,.06);border-radius:10px;padding:4px}
     .auth-tab-btn{flex:1;padding:8px 0;border:none;border-radius:7px;background:transparent;font-family:inherit;font-size:14px;font-weight:500;color:#888;cursor:pointer;transition:all .2s}
@@ -97,7 +95,6 @@ function googleSVG() {
   </svg>`;
 }
 
-
 window.switchAuthTab = (tab) => {
   clearAuthErr();
   document.querySelectorAll('.auth-tab-btn').forEach(b =>
@@ -117,6 +114,9 @@ onAuthStateChanged(auth, user => {
     showPage('auth-page');
   }
 });
+
+
+
 
 window.doLogin = async () => {
   const email = v('li-email');
@@ -231,7 +231,6 @@ window.addProduct = async () => {
     btn.disabled = false;
   }
 };
-
 
 window.previewImg = (input) => {
   const file = input.files[0];
@@ -400,3 +399,37 @@ function friendlyError(code) {
   };
   return map[code] || `Auth error: ${code}`;
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Ensure required DOM elements exist
+  if (!document.getElementById('auth-error')) {
+    const authPage = document.getElementById('auth-page');
+    if (authPage) {
+      const errorEl = document.createElement('div');
+      errorEl.id = 'auth-error';
+      errorEl.className = 'error-box';
+      authPage.insertBefore(errorEl, authPage.firstChild);
+    }
+  }
+  if (!document.getElementById('toast')) {
+    const toastEl = document.createElement('div');
+    toastEl.id = 'toast';
+    document.body.appendChild(toastEl);
+  }
+  if (!document.getElementById('products-grid')) {
+    const grid = document.createElement('div');
+    grid.id = 'products-grid';
+    grid.className = 'products-grid';
+    const dashPage = document.getElementById('dashboard-page');
+    if (dashPage) dashPage.appendChild(grid);
+  }
+  if (!document.getElementById('p-badge')) {
+    const badge = document.createElement('span');
+    badge.id = 'p-badge';
+    const dashPage = document.getElementById('dashboard-page');
+    if (dashPage) dashPage.insertBefore(badge, dashPage.firstChild);
+  }
+});
+
+
+
